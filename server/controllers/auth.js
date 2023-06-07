@@ -9,22 +9,22 @@ exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
   try {
     const old_user = await User.find({ email: email });
-    if (!old_user) {
+    if (!old_user.username) {
       const user = await User.create({
         username,
         email,
         password,
       });
       const apiData = {
-          id: user._id,
-          balanceId: Date.now(),
-          currency: "USD",
-          email: user.email,
-          name: user.username,
-          cburl: 'http://38.242.213.74/updateBalance',
-          ucurl: 'http://38.242.213.74/getUserData'
+        id: user._id,
+        balanceId: Date.now(),
+        currency: "USD",
+        email: user.email,
+        name: user.username,
+        cburl: 'http://38.242.213.74/updateBalance',
+        ucurl: 'http://38.242.213.74/getUserData'
       };
-      const cRes = await axios.post('https://vegasbets.site/get/register', apiData, { headers: {'api':'BopzRkUUsX5j0wkN1f7RLM9Zj'} });
+      const cRes = await axios.post('https://vegasbets.site/get/register', apiData, { headers: { 'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj' } });
       if (!cRes.data) return false;
       sendToken(user, 201, res);
     } else {
