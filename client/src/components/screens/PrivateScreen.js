@@ -80,8 +80,9 @@ const PrivateScreen = ({ history }) => {
       });
       gameContent.current.src = res.data;
     } catch (error) {
+      console.log(error);
       // localStorage.removeItem('authToken');
-      setError('You are not authorized please login');
+      // setError('You are not authorized please login');
     }
   }
 
