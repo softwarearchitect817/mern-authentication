@@ -13,9 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/private', require('./routes/private'));
-app.use('/api/private/playGame', require('./routes/private'));
-app.use('/api/private/getUserData', require('./routes/private'));
-app.use('/api/private/updateBalance', require('./routes/private'));
+// app.use('/api/private/playGame', require('./routes/private'));
+// app.use('/api/private/getUserData', require('./routes/private'));
+// app.use('/api/private/updateBalance', require('./routes/private'));
 
 app.use(errorHandler);
 

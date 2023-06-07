@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Users = require('../models/User');
 
 exports.getPrivateData = async (req, res, next) => {
   const response = await axios.get(`${process.env.PROVIDE_URL}/get/game-list`);
@@ -17,7 +18,7 @@ exports.updateBalance = async (req, res) => {
   res.end();
 }
 
-exports.getUserData = async (req, res) => {
+exports.getUserData = async (req, res, next) => {
   const userId = req.body.opid;
   const userInfo = await Users.findById(userId);
   const responseData = {
