@@ -33,7 +33,7 @@ const RegisterScreen = ({ history }) => {
     }
     try {
       const { data } = await axios.post(
-        'http://192.168.114.61:5000/api/auth/register',
+        'http://192.168.114.43:5000/api/auth/register',
         { username, email, password },
         config
       );
@@ -41,10 +41,7 @@ const RegisterScreen = ({ history }) => {
       history.push('/');
     } catch (error) {
       console.log(error);
-      setError(error.response.data);
-      setTimeout(() => {
-        setError('');
-      }, 5000);
+      setError("Server is not responding");
     }
   };
   return (

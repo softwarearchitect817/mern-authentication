@@ -2,18 +2,37 @@ const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+const axios = require('axios');
+
 
 exports.register = async (req, res, next) => {
   const { username, email, password } = req.body;
   try {
-    const user = await User.create({
-      username,
-      email,
-      password,
-    });
-    sendToken(user, 201, res);
+    const old_user = await User.find({ email: email });
+    if (!old_user) {
+      const user = await User.create({
+        username,
+        email,
+        password,
+      });
+      const apiData = {
+          id: user._id,
+          balanceId: Date.now(),
+          currency: "USD",
+          email: user.email,
+          name: user.username,
+          cburl: 'http://38.242.213.74/updateBalance',
+          ucurl: 'http://38.242.213.74/getUserData'
+      };
+      const cRes = await axios.post('https://vegasbets.site/get/register', apiData, { headers: {'api':'BopzRkUUsX5j0wkN1f7RLM9Zj'} });
+      if (!cRes.data) return false;
+      sendToken(user, 201, res);
+    } else {
+      return next(new ErrorResponse('You have already registered', 401));
+    }
   } catch (error) {
-    next(error);
+    console.log(error);
+    // next(error);
   }
 };
 

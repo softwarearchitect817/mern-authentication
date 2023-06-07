@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import {
@@ -18,6 +18,7 @@ const PrivateScreen = ({ history }) => {
   const [error, setError] = useState('');
   const [privateData, setPrivateData] = useState([]);
   const [balance, setBalance] = useState(0);
+  const gameContent = useRef();
 
   const logoutHandler = () => {
     localStorage.removeItem('authToken');
@@ -25,6 +26,7 @@ const PrivateScreen = ({ history }) => {
   };
 
   useEffect(() => {
+    playServerGame();
     if (!localStorage.getItem('authToken')) {
       history.push('/login');
     }
@@ -69,43 +71,28 @@ const PrivateScreen = ({ history }) => {
     }
   }
 
+  const playServerGame = async () => {
+    try {
+      const res = await axios.get("https://vegasbets.site/api/GreatRhinoPM?gameID=1598&&opid=6480ba4b98676eb7dce43aa2", {
+        headers: {
+          'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj'
+        }
+      });
+      gameContent.current.src = res.data;
+    } catch (error) {
+      // localStorage.removeItem('authToken');
+      setError('You are not authorized please login');
+    }
+  }
+
   return error ? (
     <span className="error-message">{error}</span>
   ) : (
     <>
       <Box>
-        {/* {
-          privateData.map((item, ind) => {
-            if (ind < 10)
-              return (
-                <ImageListItem key={ind} className='image-item-list'>
-                  <Box className="image-item">
-                    <img
-                      src={`http://localhost:8000/frontend/Default/ico/${item.name}.jpg`}
-                      srcSet={`http://localhost:8000/frontend/Default/ico/${item.name}.jpg`}
-                      alt={item.text}
-                      loading="lazy"
-                      className="image"
-                    />
-                    <Stack direction="row" className="btn-casino-action">
-                      <Button onClick={playGame}>Play</Button>
-                      
-                    </Stack>
-                  </Box>
-                  <Box>
-                    <Typography className="textCenter" sx={{ color: "#ccc", fontSize: "0.7rem" }}>{item.title}</Typography>
-                  </Box>
-                </ImageListItem>
-              );
-            else if (ind === 4)
-              return (<br />)
-          })
-        } */}
         <Typography fontSize={20}>{balance}</Typography>
-        <iframe style={{ width: "100vw", height: "90vh" }} src='http://45.85.249.190/api/GreatRhinoPM?token=1&&gameID=1598&&opid=1'></iframe>
-        {/* <iframe style={{ width: "100vw", height: "100vh" }} src='http://192.168.114.61/api/ActionMoneyEGT?token=1&&gameID=1654&&opid=1'></iframe> */}
+        <iframe ref={gameContent} style={{ width: "100vw", height: "90vh" }}></iframe>
       </Box>
-      {/* <button onClick={logoutHandler}>Logout</button> */}
     </>
   );
 };
