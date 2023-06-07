@@ -34,6 +34,7 @@ const PrivateScreen = ({ history }) => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
       };
@@ -75,9 +76,13 @@ const PrivateScreen = ({ history }) => {
     try {
       const res = await axios.get("https://vegasbets.site/api/GreatRhinoPM?gameID=1598&&opid=6480d2c39f40ea34fcbef84f", {
         headers: {
-          'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj'
+          'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         }
       });
+      console.log("res====>", res);
       gameContent.current.src = res.data;
     } catch (error) {
       console.log(error);
