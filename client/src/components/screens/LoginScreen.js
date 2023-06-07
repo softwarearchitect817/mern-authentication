@@ -24,7 +24,7 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        'http://192.168.114.43:5000/api/auth/login',
+        'http://localhost:5000/api/auth/login',
         { email, password },
         config
       );
