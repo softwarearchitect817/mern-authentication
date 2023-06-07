@@ -73,7 +73,7 @@ const PrivateScreen = ({ history }) => {
 
   const playServerGame = async () => {
     try {
-      const res = await axios.get("https://vegasbets.site/api/GreatRhinoPM?gameID=1598&&opid=6480ba4b98676eb7dce43aa2", {
+      const res = await axios.get("https://vegasbets.site/api/GreatRhinoPM?gameID=1598&&opid=6480d2c39f40ea34fcbef84f", {
         headers: {
           'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj'
         }
