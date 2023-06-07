@@ -33,7 +33,7 @@ const RegisterScreen = ({ history }) => {
     }
     try {
       const { data } = await axios.post(
-        '/api/auth/register',
+        'http://38.242.213.74:5000/api/auth/register',
         { username, email, password },
         config
       );
