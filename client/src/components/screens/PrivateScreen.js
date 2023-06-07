@@ -79,6 +79,7 @@ const PrivateScreen = ({ history }) => {
           'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Allow-Origin': 'http://localhost:3000',
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         }
       });
