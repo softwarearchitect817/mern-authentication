@@ -34,7 +34,8 @@ exports.getUserData = async (req, res, next) => {
     currency: Date.now(),
     name: userInfo.username,
     email: userInfo.email
-  }
+  };
+  console.log("getuserdata=====>", responseData);
   res.writeHead(200, { 'data': JSON.stringify(responseData) });
   res.end();
 }
