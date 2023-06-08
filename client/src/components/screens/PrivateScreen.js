@@ -26,7 +26,6 @@ const PrivateScreen = ({ history }) => {
   };
 
   useEffect(() => {
-    playServerGame();
     if (!localStorage.getItem('authToken')) {
       history.push('/login');
     }
@@ -72,32 +71,12 @@ const PrivateScreen = ({ history }) => {
     }
   }
 
-  const playServerGame = async () => {
-    try {
-      const res = await axios.post("http://38.242.213.74:5000/api/private/playGame", {
-        name: "GreatRhinoPM", id: "1598", opid: "6480d2c39f40ea34fcbef84f"
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      })
-      console.log("res====>", res);
-      gameContent.current.src = res.data;
-    } catch (error) {
-      console.log(error);
-      // localStorage.removeItem('authToken');
-      // setError('You are not authorized please login');
-    }
-  }
-
   return error ? (
     <span className="error-message">{error}</span>
   ) : (
     <>
       <Box>
-        <Typography fontSize={20}>{balance}</Typography>
-        <iframe ref={gameContent} style={{ width: "100vw", height: "90vh" }}></iframe>
+        <iframe id='gameContent' src='http://vegasbets.site/api/GreatRhinoPM?gameID=1598&opid=6480ba4b98676eb7dce43aa2&api=BopzRkUUsX5j0wkN1f7RLM9Zj' style={{ width: "100vw", height: "90vh" }}></iframe>
       </Box>
     </>
   );
