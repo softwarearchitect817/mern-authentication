@@ -8,7 +8,13 @@ exports.getPrivateData = async (req, res, next) => {
 
 
 exports.playGame = async (req, res, next) => {
-  const response = await axios.get(req.body.url);
+  const { name, id, opid } = req.body;
+  console.log("name====>", name, id, opid);
+  const response = await axios.get(`https://vegasbets.site/api/${name}?gameID=${id}&opid=${opid}`, {
+    headers: {
+      api: 'BopzRkUUsX5j0wkN1f7RLM9Zj'
+    }
+  });
   console.log("response===>", response);
   res.send("response.data");
 };

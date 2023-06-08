@@ -74,15 +74,14 @@ const PrivateScreen = ({ history }) => {
 
   const playServerGame = async () => {
     try {
-      const res = await axios.get("https://vegasbets.site/api/GreatRhinoPM?gameID=1598&&opid=6480d2c39f40ea34fcbef84f", {
+      const res = await axios.post("http://38.242.213.74:5000/api/private/playGame", {
+        name: "GreatRhinoPM", id: "1598", opid: "6480d2c39f40ea34fcbef84f"
+      }, {
         headers: {
-          'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Allow-Origin': '*',
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`
         }
-      });
+      })
       console.log("res====>", res);
       gameContent.current.src = res.data;
     } catch (error) {
