@@ -76,7 +76,7 @@ const PrivateScreen = ({ history }) => {
   ) : (
     <>
       <Box>
-        <iframe id='gameContent' src='http://vegasbets.site/api/GreatRhinoPM?gameID=1598&opid=6480d2c39f40ea34fcbef84f&api=BopzRkUUsX5j0wkN1f7RLM9Zj' style={{ width: "100vw", height: "90vh" }}></iframe>
+        <iframe src='https://vegasbets.site/api/GreatRhinoPM?gameID=1598&opid=6480d2c39f40ea34fcbef84f&api=BopzRkUUsX5j0wkN1f7RLM9Zj' style={{ width: "100vw", height: "90vh" }}></iframe>
       </Box>
     </>
   );
