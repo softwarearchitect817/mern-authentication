@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
         cburl: 'http://38.242.213.74:5000/api/private/updateBalance',
         ucurl: 'http://38.242.213.74:5000/api/private/getUserData'
       };
-      const cRes = await axios.post('https://vegasbets.site/get/register', apiData, { headers: { 'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj' } });
+      const cRes = await axios.post('http://vegasbets.site/get/register', apiData, { headers: { 'api': 'BopzRkUUsX5j0wkN1f7RLM9Zj' } });
       if (!cRes.data) return false;
       sendToken(user, 201, res);
     } else {
