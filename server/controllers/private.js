@@ -3,22 +3,23 @@ const { update } = require('../models/User');
 const Users = require('../models/User');
 
 exports.getGameLaunch = async (req, res, next) => {
-  const { id, user } = req.body;
-  const userData = await Users.findById(user);
-  const data = {
-    gameID: id,
-    id: userData._id,
-    name: userData.username,
-    email: userData.email,
-    balance: userData.balance,
-    currency: "USD"
-  }
-  const response = await axios.post(`${process.env.PROVIDE_URL}/api/getGameLaunch`, data, {
-    headers: {
-      api: process.env.PROVIDE_URL_API
-    }
-  });
-  res.send(response.data);
+  res.send("https://vegasbets.site/api/GreatRhinoGM?id=324&game=1598");
+  // const { id, user } = req.body;
+  // const userData = await Users.findById(user);
+  // const data = {
+  //   gameID: id,
+  //   id: userData._id,
+  //   name: userData.username,
+  //   email: userData.email,
+  //   balance: userData.balance,
+  //   currency: "USD"
+  // }
+  // const response = await axios.post(`${process.env.PROVIDE_URL}/api/getGameLaunch`, data, {
+  //   headers: {
+  //     api: process.env.PROVIDE_URL_API
+  //   }
+  // });
+  // res.send(response.data);
 }
 
 exports.getPrivateData = async (req, res, next) => {
@@ -65,6 +66,7 @@ exports.getUserData = async (req, res, next) => {
 
 exports.getBalance = async (req, res) => {
   const userId = req.body.user;
+  console.log("userId===>", userId);
   const response = await Users.findById(userId);
   res.send(response);
 }
