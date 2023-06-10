@@ -4,7 +4,8 @@ const {
     getPrivateData,
     playGame,
     getUserData,
-    updateBalance
+    updateBalance,
+    getGameLaunch
 } = require('../controllers/private');
 const { protect } = require('../middleware/auth');
 
@@ -12,5 +13,6 @@ const { protect } = require('../middleware/auth');
 router.post('/playGame', playGame);
 router.post('/getUserData', getUserData);
 router.post('/updateBalance', updateBalance);
+router.post('/getGameLaunch', getGameLaunch);
 
 module.exports = router;

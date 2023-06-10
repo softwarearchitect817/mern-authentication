@@ -1,6 +1,25 @@
 const axios = require('axios');
 const Users = require('../models/User');
 
+exports.getGameLaunch = async (req, res, next) => {
+  const { id, user } = req.body;
+  const userData = await Users.findById(user);
+  const data = {
+    gameID: id,
+    id: userData._id,
+    name: userData.username,
+    email: userData.email,
+    balance: userData.balance,
+    currency: "USD"
+  }
+  const response = await axios.post(`${process.env.PROVIDE_URL}/api/getGameLaunch`, data, {
+    headers: {
+      api: process.env.PROVIDE_URL_API
+    }
+  });
+  res.send(response.data);
+}
+
 exports.getPrivateData = async (req, res, next) => {
   const response = await axios.get(`${process.env.PROVIDE_URL}/get/game-list`);
   res.send(response.data);

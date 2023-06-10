@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './LoginScreen.css';
+import { APP_URL } from '../../config';
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -24,7 +25,7 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        'http://38.242.213.74:5000/api/auth/login',
+        `${APP_URL}/api/auth/login`,
         { email, password },
         config
       );

@@ -14,6 +14,8 @@ import {
   IconButton, ImageListItemBar, getPopoverUtilityClass
 } from '@mui/material';
 
+import { APP_URL } from '../../config';
+
 const PrivateScreen = ({ history }) => {
   const [error, setError] = useState('');
   const [privateData, setPrivateData] = useState([]);
@@ -26,6 +28,7 @@ const PrivateScreen = ({ history }) => {
   };
 
   useEffect(() => {
+    getGameLaunch();
     if (!localStorage.getItem('authToken')) {
       history.push('/login');
     }
@@ -51,13 +54,26 @@ const PrivateScreen = ({ history }) => {
     // fetchPrivateData();
   }, [history]);
 
+  const getGameLaunch = async () => {
+    const res = await axios.post(`${APP_URL}/api/private/getGameLaunch`, {
+      id: "1598",
+      user: "6480ba4b98676eb7dce43aa2"
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    });
+    document.getElementById('gameContent').src = res.data;
+  }
+
   const playGame = async () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        url: "http://localhost:8000/api/game?gameID=1598&token=123&opid=123"
       },
-      url: "http://localhost:8000/api/game?gameID=1598&token=123&opid=123"
     };
     try {
       const res = await axios.post(
@@ -76,7 +92,8 @@ const PrivateScreen = ({ history }) => {
   ) : (
     <>
       <Box>
-        <iframe src='https://vegasbets.site/api/GreatRhinoPM?gameID=1598&opid=6480d2c39f40ea34fcbef84f&api=BopzRkUUsX5j0wkN1f7RLM9Zj' style={{ width: "100vw", height: "90vh" }}></iframe>
+        {/* https://vegasbets.site/api/GreatRhinoPM?gameID=1598&opid=6480d2c39f40ea34fcbef84f&api=BopzRkUUsX5j0wkN1f7RLM9Zj */}
+        <iframe id='gameContent' style={{ width: "100vw", height: "90vh" }}></iframe>
       </Box>
     </>
   );
