@@ -43,7 +43,7 @@ const PrivateScreen = ({ history }) => {
       const { data } = await axios.post(
         `${APP_URL}/api/private/getBalance`,
         {
-          user: "6480ba4b98676eb7dce43aa2"
+          user: "6480d2c39f40ea34fcbef84f"
         }, {
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const PrivateScreen = ({ history }) => {
   const getGameLaunch = async () => {
     const res = await axios.post(`${APP_URL}/api/private/getGameLaunch`, {
       id: "1598",
-      user: "6480ba4b98676eb7dce43aa2"
+      user: "6480d2c39f40ea34fcbef84f"
     }, {
       headers: {
         'Content-Type': 'application/json',
