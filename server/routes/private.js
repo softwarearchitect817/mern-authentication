@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getPrivateData,
+    getBalance,
     playGame,
     getUserData,
     updateBalance,
@@ -14,5 +14,6 @@ router.post('/playGame', playGame);
 router.post('/getUserData', getUserData);
 router.post('/updateBalance', updateBalance);
 router.post('/getGameLaunch', getGameLaunch);
+router.post('/getBalance', getBalance)
 
 module.exports = router;

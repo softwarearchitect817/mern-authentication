@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { update } = require('../models/User');
 const Users = require('../models/User');
 
 exports.getGameLaunch = async (req, res, next) => {
@@ -42,15 +43,14 @@ exports.playGame = async (req, res, next) => {
 };
 
 exports.updateBalance = async (req, res) => {
-  res.writeHead(200);
-  res.end();
+  const data = req.body.data;
+  await Users.findById(data.player).updateOne({ 'balance': data.balance });
+  res.status(200).send(true);
 }
 
 exports.getUserData = async (req, res, next) => {
   const userId = req.body.opid;
-  console.log("userId====>", userId);
   const userInfo = await Users.findById(userId);
-  console.log("userinfo----->", userInfo);
   const responseData = {
     userId: userId,
     balanceId: Date.now(),
@@ -59,7 +59,12 @@ exports.getUserData = async (req, res, next) => {
     name: userInfo.username,
     email: userInfo.email
   };
-  console.log("getuserdata=====>", responseData);
   res.writeHead(200, { 'data': JSON.stringify(responseData) });
   res.end();
+}
+
+exports.getBalance = async (req, res) => {
+  const userId = req.body.user;
+  const response = await Users.findById(userId);
+  res.send(response);
 }
